@@ -1,0 +1,43 @@
+﻿@using HtmlToPdF.Shared
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users Report</title>
+
+    <link rel="stylesheet" href="https://localhost:7273/reports.css" />
+</head>
+<body>
+    <h1 class="header">Users Report</h1>
+
+    <hr />
+
+    @if (Users.Count > 0)
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Users)
+                {
+                    <tr>
+                        <td>@user.Firstname, @user.Lastname</td>
+                        <td>@user.Grade</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</body>
+</html>
+
+@code {
+    [Parameter]
+    public List<User> Users { get; set; } = [];
+}

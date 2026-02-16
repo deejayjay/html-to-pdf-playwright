@@ -1,0 +1,65 @@
+﻿@page "/users/report"
+@rendermode InteractiveWebAssembly
+
+@using HtmlToPdF.Shared
+@using HtmlToPdF.WebApp.Client.Services.Interfaces
+
+@inject IReportService ReportService
+@inject IJSRuntime JS
+
+<h3>Users Report</h3>
+
+<button type="button" class="btn btn-success" @onclick="DownloadPdf" disabled="@_isLoading">Generate Report</button>
+
+@code {
+    bool _isLoading = false;
+
+    private async Task DownloadPdf()
+    {
+        List<User> users =
+        [
+            new User
+            {
+                Firstname = "John",
+                Lastname = "Doe",
+                Grade = "A"
+            },
+            new User
+            {
+                Firstname = "Jane",
+                Lastname = "Smith",
+                Grade = "B"
+            },
+            new User
+            {
+                Firstname = "Alice",
+                Lastname = "Johnson",
+                Grade = "A"
+            },
+            new User
+            {
+                Firstname = "Bob",
+                Lastname = "Brown",
+                Grade = "C"
+            },
+            new User
+            {
+                Firstname = "Charlie",
+                Lastname = "Davis",
+                Grade = "B"
+            }
+        ];
+
+        _isLoading = true;
+
+        var pdfBytes = await ReportService.GeneratePdfReportAsync(users);
+
+        await JS.InvokeVoidAsync(
+            "downloadFile",
+            "UserReport.pdf",
+            Convert.ToBase64String(pdfBytes)
+        );
+
+        _isLoading = false;
+    }
+}

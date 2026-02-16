@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="HtmlToPdF.Shared/HtmlToPdF.Shared.csproj" />
+  <Project Path="HtmlToPdF.WebApp/HtmlToPdF.WebApp.Client/HtmlToPdF.WebApp.Client.csproj" />
+  <Project Path="HtmlToPdF.WebApp/HtmlToPdF.WebApp/HtmlToPdF.WebApp.csproj" />
+</Solution>
